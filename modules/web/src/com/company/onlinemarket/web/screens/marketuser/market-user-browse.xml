@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://browseCaption"
+        focusComponent="marketUsersTable"
+        messagesPack="com.company.onlinemarket.web.screens.marketuser">
+    <data readOnly="true">
+        <collection id="marketUsersDc"
+                    class="com.company.onlinemarket.entity.MarketUser"
+                    view="marketUser-view">
+            <loader id="marketUsersDl">
+                <query>
+                    <![CDATA[select e from onlinemarket_MarketUser e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="marketUsersTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="marketUsersTable"
+                dataLoader="marketUsersDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="marketUsersTable"
+                    width="100%"
+                    dataContainer="marketUsersDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="customer"/>
+                <column id="login"/>
+                <column id="name"/>
+                <column id="firstName"/>
+                <column id="lastName"/>
+                <column id="middleName"/>
+                <column id="position"/>
+                <column id="email"/>
+                <column id="active"/>
+                <column id="changePasswordAtNextLogon"/>
+                <column id="group"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="marketUsersTable.create"/>
+                <button id="editBtn" action="marketUsersTable.edit"/>
+                <button id="removeBtn" action="marketUsersTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

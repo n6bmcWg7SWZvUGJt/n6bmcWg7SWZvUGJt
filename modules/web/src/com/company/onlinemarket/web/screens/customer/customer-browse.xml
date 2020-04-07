@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://browseCaption"
+        focusComponent="customersTable"
+        messagesPack="com.company.onlinemarket.web.screens.customer">
+    <data readOnly="true">
+        <collection id="customersDc"
+                    class="com.company.onlinemarket.entity.Customer"
+                    view="customer-view">
+            <loader id="customersDl">
+                <query>
+                    <![CDATA[select e from onlinemarket_Customer e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="customersTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="customersTable"
+                dataLoader="customersDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="customersTable"
+                    width="100%"
+                    dataContainer="customersDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="createIndividual" type="create"/>
+                <action id="createLegalEntity" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="marketUser"/>
+                <column id="stype"/>
+                <column id="address"/>
+                <column id="email"/>
+            </columns>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <popupButton id="popupButton" caption="Create">
+                    <actions>
+                        <action id="createIndividual" caption="Create Individual"/>
+                        <action id="createLegalEntity" caption="Create Legal entity"/>
+                    </actions>
+                </popupButton>
+                <button id="editBtn" action="customersTable.edit"/>
+                <button id="removeBtn" action="customersTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns="http://schemas.haulmont.com/cuba/rest-services-v2.xsd">
+    <service name="onlinemarket_RestAPIService">
+        <method name="getGoodsList">
+            <param name="shop"/>
+        </method>
+        <method name="createCustomer">
+            <param name="String name"/>
+        </method>
+        <method name="createOrder">
+            <param name="shop"/>
+            <param name="goodsName"/>
+            <param name="count"/>
+        </method>
+        <method name="deleteOrder">
+            <param name="orderNo"/>
+        </method>
+    </service>
+</services>
+

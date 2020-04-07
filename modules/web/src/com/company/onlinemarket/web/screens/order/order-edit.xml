@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="form"
+        messagesPack="com.company.onlinemarket.web.screens.order">
+    <data>
+        <instance id="orderDc"
+                  class="com.company.onlinemarket.entity.Order"
+                  view="order-view">
+            <loader/>
+            <instance id="orderShipmentDc" property="shipment">
+                <collection id="purchaseCollection" property="purchase"/>
+                <instance id="shopInstance" property="shop"/>
+            </instance>
+        </instance>
+        <collection id="goodsesDc" class="com.company.market.entity.Goods" view="goods-view">
+            <loader id="goodsesDl">
+            </loader>
+        </collection>
+        <collection id="allGoodsesDc" class="com.company.market.entity.Goods" view="goods-view">
+            <loader id="goodsesDl">
+                <query>
+                    <![CDATA[select e from market_Goods e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true">
+        <tabSheet height="auto">
+            <tab caption="Order" margin="true,false,false,false" spacing="true" id="tab" expand="form">
+                <form id="form" dataContainer="orderDc" width="100%">
+                    <column width="250px">
+                        <pickerField id="customerField" property="customer">
+                            <actions>
+                                <action id="lookup" type="picker_lookup"/>
+                                <action id="clear" type="picker_clear"/>
+                            </actions>
+                        </pickerField>
+                        <textField id="orderPriceField" property="orderPrice" visible="false"/>
+                        <textField id="noField" property="no" dataContainer="orderDc" visible="false"/>
+                        <textField id="statusField" property="status" visible="false"/>
+                        <pickerField dataContainer="orderShipmentDc" property="shop">
+                            <actions>
+                                <action id="lookup" type="picker_lookup"/>
+                                <action id="clear" type="picker_clear"/>
+                            </actions>
+                        </pickerField>
+                        <pickerField id="shipmentField" property="shipment" visible="false">
+                            <actions>
+                                <action id="lookup" type="picker_lookup"/>
+                                <action id="clear" type="picker_clear"/>
+                            </actions>
+                        </pickerField>
+                        <textField id="globalDiscountField" datatype="int" caption="Discount" dataContainer="orderDc"
+                                   property="discount">
+                            <validators>
+                                <max value="99" message="99"/>
+                                <min message="0" value="0"/>
+                            </validators>
+                        </textField>
+                        <dataGrid id="purchasesTable" height="200px" width="100%" dataContainer="purchaseCollection">
+                            <actions>
+                                <action id="create" type="create"/>
+                                <action id="edit" type="edit"/>
+                                <action id="remove" type="remove"/>
+                            </actions>
+                            <buttonsPanel alwaysVisible="true">
+                                <button id="purchasesTableCreateBtn" action="purchasesTable.create"/>
+                                <button id="purchasesTableEditBtn" action="purchasesTable.edit"/>
+                                <button id="purchasesTableRemoveBtn" action="purchasesTable.remove"/>
+                                <button id="refreshButton" caption="refresh"/>
+                            </buttonsPanel>
+                            <columns>
+                                <column id="goods.product" property="goods.product"/>
+                                <column id="goods.price" property="goods.price"/>
+                                <column id="count" property="count"/>
+                                <column id="goods.discount" property="goods.discount"/>
+                                <column id="shipment" property="shipment"/>
+                            </columns>
+                        </dataGrid>
+                        <label id="sumLabel" value="0"/>
+                    </column>
+                </form>
+                <hbox id="editActions" spacing="true">
+                    <button action="windowCommitAndClose"/>
+                    <button action="windowClose"/>
+                </hbox>
+            </tab>
+            <tab caption="Day discounts" margin="true,false,false,false" spacing="true" id="tab_1">
+                <label value="&#1058;&#1086;&#1074;&#1072;&#1088;&#1099; &#1089;&#1086; &#1089;&#1080;&#1076;&#1082;&#1086;&#1081;"/>
+                <dataGrid id="goodsDataGrid" height="100%" width="100%" dataContainer="goodsesDc">
+                    <columns>
+                        <column property="price"/>
+                        <column id="discount" property="discount" caption="Discount"/>
+                        <column property="quantity"/>
+                        <column property="product.name"/>
+                    </columns>
+                </dataGrid>
+            </tab>
+        </tabSheet>
+    </layout>
+</window>

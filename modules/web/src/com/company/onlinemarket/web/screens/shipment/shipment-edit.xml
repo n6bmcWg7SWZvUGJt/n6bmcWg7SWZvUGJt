@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="form"
+        messagesPack="com.company.onlinemarket.web.screens.shipment">
+    <data>
+        <instance id="shipmentDc"
+                  class="com.company.market.entity.Shipment"
+                  view="shipment-view">
+            <loader/>
+            <collection id="purchaseDc" property="purchase"/>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="editActions" spacing="true">
+        <form id="form" dataContainer="shipmentDc">
+            <column width="250px">
+                <pickerField id="shopField" property="shop">
+                    <actions>
+                        <action id="lookup" type="picker_lookup"/>
+                        <action id="clear" type="picker_clear"/>
+                    </actions>
+                </pickerField>
+                <dateField id="dateField" property="date"/>
+            </column>
+        </form>
+        <groupBox id="purchaseBox" caption="msg://com.company.market.entity/Shipment.purchase">
+            <table id="purchaseTable" dataContainer="purchaseDc" width="100%" height="200px">
+                <actions>
+                    <action id="create" type="create"/>
+                    <action id="edit" type="edit"/>
+                    <action id="remove" type="remove"/>
+                </actions>
+                <columns>
+                    <column id="count"/>
+                    <column id="goods"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="purchaseTable.create"/>
+                    <button action="purchaseTable.edit"/>
+                    <button action="purchaseTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

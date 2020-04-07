@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
+
+    <view entity="onlinemarket_MarketUser" name="marketUser-view" extends="_local">
+        <property name="customer" view="_minimal"/>
+        <property name="group" view="_minimal"/>
+        <property name="userRoles" view="_minimal"/>
+        <property name="substitutions" view="_minimal"/>
+    </view>
+    <view entity="onlinemarket_Order" name="order-view" extends="_local">
+        <property name="customer" view="_minimal"/>
+        <property name="status"/>
+        <property name="shipment" view="_minimal">
+            <property name="date"/>
+            <property name="purchase" view="_minimal">
+                <property name="goods" view="_minimal">
+                    <property name="discount"/>
+                    <property name="price"/>
+                    <property name="quantity"/>
+                </property>
+            </property>
+        </property>
+    </view>
+    <view entity="onlinemarket_Customer" name="customer-view" extends="_local">
+        <property name="marketUser" view="_minimal"/>
+        <property name="address" view="_minimal"/>
+    </view>
+    <view entity="onlinemarket_Individual" name="individual-view" extends="_local">
+        <property name="marketUser" view="_minimal"/>
+        <property name="address" view="_minimal"/>
+    </view>
+    <view entity="onlinemarket_LegalEntity" name="legalEntity-view" extends="_local">
+        <property name="marketUser" view="_minimal"/>
+        <property name="address" view="_minimal"/>
+    </view>
+</views>

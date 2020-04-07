@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://editorCaption"
+        focusComponent="form"
+        messagesPack="com.company.onlinemarket.web.screens.marketuser">
+    <data>
+        <instance id="marketUserDc"
+                  class="com.company.onlinemarket.entity.MarketUser"
+                  view="marketUser-view">
+            <loader/>
+            <collection id="userRolesDc" property="userRoles"/>
+            <collection id="substitutionsDc" property="substitutions"/>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="scrollBox" spacing="true">
+        <scrollBox id="scrollBox" spacing="true">
+            <form id="form" dataContainer="marketUserDc">
+                <column width="250px">
+                    <textField id="loginField" property="login"/>
+                    <textField id="passwordField" dataContainer="marketUserDc" property="password"/>
+                    <textField id="nameField" property="name"/>
+                    <textField id="firstNameField" property="firstName"/>
+                    <textField id="lastNameField" property="lastName"/>
+                    <textField id="middleNameField" property="middleName"/>
+                    <textField id="positionField" property="position"/>
+                    <textField id="emailField" property="email"/>
+                    <textField id="languageField" property="language" visible="false"/>
+                    <textField id="timeZoneField" property="timeZone" visible="false"/>
+                    <checkBox id="timeZoneAutoField" property="timeZoneAuto" visible="false"/>
+                    <checkBox id="activeField" property="active"/>
+                    <checkBox id="changePasswordAtNextLogonField" property="changePasswordAtNextLogon"/>
+                    <pickerField id="groupField" property="group">
+                        <actions>
+                            <action id="lookup" type="picker_lookup"/>
+                            <action id="clear" type="picker_clear"/>
+                        </actions>
+                    </pickerField>
+                    <textField id="ipMaskField" property="ipMask" visible="false"/>
+                    <pickerField id="customerField" property="customer">
+                        <actions>
+                            <action id="lookup" type="picker_lookup"/>
+                            <action id="clear" type="picker_clear"/>
+                        </actions>
+                    </pickerField>
+                </column>
+            </form>
+            <groupBox id="userRolesBox" caption="msg://com.company.onlinemarket.entity/MarketUser.userRoles"
+            >
+                <table id="userRolesTable" dataContainer="userRolesDc" width="100%" height="200px">
+                    <actions>
+                        <action id="create" type="create"/>
+                        <action id="edit" type="edit"/>
+                        <action id="remove" type="remove"/>
+                    </actions>
+                    <columns>
+                    </columns>
+                    <buttonsPanel>
+                        <button action="userRolesTable.create"/>
+                        <button action="userRolesTable.edit"/>
+                        <button action="userRolesTable.remove"/>
+                    </buttonsPanel>
+                </table>
+            </groupBox>
+            <groupBox id="substitutionsBox" caption="msg://com.company.onlinemarket.entity/MarketUser.substitutions"
+                      visible="false">
+                <table id="substitutionsTable" dataContainer="substitutionsDc" width="100%" height="200px">
+                    <actions>
+                        <action id="create" type="create"/>
+                        <action id="edit" type="edit"/>
+                        <action id="remove" type="remove"/>
+                    </actions>
+                    <columns>
+                    </columns>
+                    <buttonsPanel>
+                        <button action="substitutionsTable.create"/>
+                        <button action="substitutionsTable.edit"/>
+                        <button action="substitutionsTable.remove"/>
+                    </buttonsPanel>
+                </table>
+            </groupBox>
+        </scrollBox>
+        <hbox id="editActions" spacing="true">
+            <button action="windowCommitAndClose"/>
+            <button action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

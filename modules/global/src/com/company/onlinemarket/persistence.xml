@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+    <persistence-unit name="OnlineMarket" transaction-type="RESOURCE_LOCAL">
+
+        <class>com.company.onlinemarket.entity.Order</class>
+        <class>com.company.onlinemarket.entity.Customer</class>
+        <class>com.company.onlinemarket.entity.MarketUser</class>
+        <class>com.company.onlinemarket.entity.LegalEntity</class>
+        <class>com.company.onlinemarket.entity.Individual</class>
+    </persistence-unit>
+</persistence>
